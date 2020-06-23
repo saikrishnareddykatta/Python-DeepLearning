@@ -8,7 +8,7 @@ dataset = pd.read_csv('winequality-red.csv')
 print('The total null values in the data set are ', dataset.isnull().sum().sum())
 # Grouping into features and target label
 X = dataset.drop(['quality'], axis=1)
-Y = dataset[['quality']]
+Y = np.log(dataset[['quality']])
 # Build a Linear Model
 from sklearn.model_selection import train_test_split
 # split the data into train and test data sets
@@ -19,7 +19,7 @@ y_prediction = lr.predict(X_test)
 # Evaluate the performance of model using R^2 and RMSE score
 print ("R^2 is: %.2f" % lr.score(X_test, y_test))
 # print("R^2 Score: %.2f" % r2_score(Y, y_prediction))
-print("Root Mean Squared Error: %.2f" % mean_squared_error(y_test, y_prediction))
+print("Root Mean Squared Error: %.4f" % mean_squared_error(y_test, y_prediction))
 # Finding the Correlation between target label and top 3 features
 numeric_features = dataset.select_dtypes(include=[np.number])
 corr = numeric_features.corr()
